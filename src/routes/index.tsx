@@ -1,9 +1,12 @@
 import { createFileRoute } from '@tanstack/react-router';
+import { HomePage } from '~/pages/home';
+import { useInjectDarkTheme } from '~/shared/lib/hooks';
 
 export const Route = createFileRoute('/')({
   component: App,
 });
 
 function App() {
-  return <div className='bg-black text-white min-h-screen'>Hello world</div>;
+  useInjectDarkTheme();
+  return <HomePage />;
 }

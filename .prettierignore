@@ -1,3 +1,35 @@
 package-lock.json
 pnpm-lock.yaml
 yarn.lock
+
+# Ignore all build output
+dist/
+build/
+out/
+
+# Ignore node_modules
+node_modules/
+
+# Ignore coverage reports
+coverage/
+
+# Ignore environment files
+.env
+.env.*
+
+# Ignore specific config files
+*.config.js
+
+# Ignore public assets
+public/
+
+# Ignore minified files
+*.min.js
+*.min.css
+
+# Ignore generated files
+*.generated.js
+*.generated.ts
+
+# Ignore snapshots (for testing)
+**/__snapshots__/
