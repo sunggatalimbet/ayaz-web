@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
+import { StatisticsPage } from '~/pages/statistics';
 import { useInjectDarkTheme } from '~/shared/lib/hooks';
 
 export const Route = createFileRoute('/statistics')({
@@ -7,5 +8,5 @@ export const Route = createFileRoute('/statistics')({
 
 function RouteComponent() {
   useInjectDarkTheme();
-  return <div>Hello "/statistics"!</div>;
+  return <StatisticsPage />;
 }
