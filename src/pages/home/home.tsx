@@ -13,8 +13,6 @@ export function HomePage() {
 
   const {
     data: coldExposureData,
-    isLoading,
-    isError,
   } = useQuery({
     queryKey: ['cold_exposures'],
     queryFn: () => getColdExposures('fcf6968e-8e77-4afb-821f-839e057a458d'),
