@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Clock, Play, Plus } from 'lucide-react';
 
 import { getColdExposures } from '~/entities/cold-exposures/api';
+import { CreateSessionForm } from '~/features/session';
 import { Button } from '~/shared/shadcn-ui/button';
 import { Header } from '~/widgets/header';
 
@@ -16,7 +17,7 @@ export function HomePage() {
     isError,
   } = useQuery({
     queryKey: ['cold_exposures'],
-    queryFn: getColdExposures,
+    queryFn: () => getColdExposures('fcf6968e-8e77-4afb-821f-839e057a458d'),
   });
 
   // const handleSessionComplete = () => {
@@ -63,7 +64,7 @@ export function HomePage() {
 
         {showForm ? (
           <div className='animate-slide-down space-y-4'>
-            {/* <CreateSessionForm onSessionCreated={refreshSessions} /> */}
+            <CreateSessionForm />
             <Button
               variant='outline'
               className='w-full'

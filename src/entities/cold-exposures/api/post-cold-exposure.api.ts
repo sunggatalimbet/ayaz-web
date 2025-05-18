@@ -1,20 +1,22 @@
 import { baseQuery } from '~/shared/api/base-query';
 
+import type { PostColdExposureRequest } from '../model/contracts';
 import type { IColdExposure } from '../model/types';
 
-export const getColdExposures = async (
-  userId: string,
+export const postColdExposure = async (
+  newColdExposure: PostColdExposureRequest,
 ): Promise<Array<IColdExposure>> => {
   const options = {
-    method: 'GET',
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
     },
+    body: JSON.stringify(newColdExposure),
   };
 
   const response = await baseQuery({
-    endpoint: `cold_exposures/user/${userId}`,
+    endpoint: `cold_exposures`,
     options,
   });
   return response;

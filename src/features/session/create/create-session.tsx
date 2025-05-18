@@ -1,7 +1,10 @@
 import type React from 'react';
 import { useState } from 'react';
 
-import type { ColdExposureSession } from '~/shared/model/types';
+import { useMutation } from '@tanstack/react-query';
+
+import { postColdExposure } from '~/entities/cold-exposures/api/post-cold-exposure.api';
+import type { PostColdExposureRequest } from '~/entities/cold-exposures/model/contracts';
 import { Button } from '~/shared/shadcn-ui/button';
 import {
   Card,
@@ -12,31 +15,31 @@ import {
 import { Input } from '~/shared/shadcn-ui/input';
 import { Label } from '~/shared/shadcn-ui/label';
 
-interface SessionFormProps {
-  onSessionCreated: () => void;
-}
-
-export function CreateSessionForm({ onSessionCreated }: SessionFormProps) {
+export function CreateSessionForm() {
   const [name, setName] = useState('');
   const [coldDuration, setColdDuration] = useState('60');
   const [preparationDuration, setPreparationDuration] = useState('25');
 
+  const { mutate: createColdExposure } = useMutation({
+    mutationFn: (newColdExposure: PostColdExposureRequest) => {
+      return postColdExposure(newColdExposure);
+    },
+  });
+
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const session: ColdExposureSession = {
-      id: Date.now().toString(),
-      name,
-      coldDuration: Number.parseInt(coldDuration),
-      preparationDuration: Number.parseInt(preparationDuration),
+    const requestBody: PostColdExposureRequest = {
+      userId: 'fcf6968e-8e77-4afb-821f-839e057a458d',
+      name: 'Cold exposure',
+      exposureDuration: 60,
+      preparationDuration: 10,
     };
 
-    console.log({ session });
+    e.preventDefault();
+    createColdExposure(requestBody);
 
     setName('');
     setColdDuration('60');
     setPreparationDuration('25');
-
-    onSessionCreated();
   };
 
   return (
