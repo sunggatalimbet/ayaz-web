@@ -1,6 +1,16 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-const queryClient = new QueryClient();
+// Create a client with custom configuration
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      // Disable refetching on window focus
+      refetchOnWindowFocus: false,
+      // Disable refetching when tab becomes visible again
+      refetchOnReconnect: false,
+    },
+  },
+});
 
 export function getContext() {
   return {

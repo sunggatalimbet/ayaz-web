@@ -1,4 +1,8 @@
 import { useState } from 'react';
+
+import { Award, BarChart, Calendar, Clock } from 'lucide-react';
+
+import type { TimePeriod } from '~/shared/model/types';
 import {
   Card,
   CardContent,
@@ -12,17 +16,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/shared/shadcn-ui/select';
-import { Clock, Calendar, BarChart, Award } from 'lucide-react';
 import { Header } from '~/widgets/header';
-import type { TimePeriod } from '~/shared/model/types';
-import { formatMinutes, getStatistics } from '~/shared/model/mock-storage';
 
 export function StatisticsPage() {
   const [period, setPeriod] = useState<TimePeriod>('month');
-  const stats = getStatistics(period);
 
   return (
-    <div className='container max-w-md mx-auto p-4'>
+    <div className='container mx-auto max-w-md p-4'>
       <Header />
 
       <div className='mb-6'>
@@ -42,50 +42,42 @@ export function StatisticsPage() {
         </Select>
       </div>
 
-      <div className='grid grid-cols-2 gap-4 mb-6'>
+      <div className='mb-6 grid grid-cols-2 gap-4'>
         <Card className='border-zinc-800 bg-zinc-900'>
-          <CardContent className='p-4 flex flex-col items-center justify-center h-full'>
-            <Calendar className='h-8 w-8 mb-2 text-white' />
-            <div className='text-2xl font-bold'>{stats.count}</div>
-            <div className='text-sm text-muted-foreground text-center'>
+          <CardContent className='flex h-full flex-col items-center justify-center p-4'>
+            <Calendar className='mb-2 h-8 w-8 text-white' />
+            <div className='text-2xl font-bold'>201</div>
+            <div className='text-muted-foreground text-center text-sm'>
               Cold Exposures
             </div>
           </CardContent>
         </Card>
 
         <Card className='border-zinc-800 bg-zinc-900'>
-          <CardContent className='p-4 flex flex-col items-center justify-center h-full'>
-            <Clock className='h-8 w-8 mb-2 text-white' />
-            <div className='text-2xl font-bold'>
-              {formatMinutes(stats.totalColdDuration)}
-            </div>
-            <div className='text-sm text-muted-foreground text-center'>
+          <CardContent className='flex h-full flex-col items-center justify-center p-4'>
+            <Clock className='mb-2 h-8 w-8 text-white' />
+            <div className='text-2xl font-bold'>60</div>
+            <div className='text-muted-foreground text-center text-sm'>
               Total Cold Time
             </div>
           </CardContent>
         </Card>
 
         <Card className='border-zinc-800 bg-zinc-900'>
-          <CardContent className='p-4 flex flex-col items-center justify-center h-full'>
-            <BarChart className='h-8 w-8 mb-2 text-white' />
-            <div className='text-2xl font-bold'>
-              {stats.count > 0
-                ? formatMinutes(stats.averageColdDuration)
-                : '0 min'}
-            </div>
-            <div className='text-sm text-muted-foreground text-center'>
+          <CardContent className='flex h-full flex-col items-center justify-center p-4'>
+            <BarChart className='mb-2 h-8 w-8 text-white' />
+            <div className='text-2xl font-bold'>4 mins</div>
+            <div className='text-muted-foreground text-center text-sm'>
               Average Duration
             </div>
           </CardContent>
         </Card>
 
         <Card className='border-zinc-800 bg-zinc-900'>
-          <CardContent className='p-4 flex flex-col items-center justify-center h-full'>
-            <Award className='h-8 w-8 mb-2 text-white' />
-            <div className='text-2xl font-bold'>
-              {formatMinutes(stats.longestColdDuration)}
-            </div>
-            <div className='text-sm text-muted-foreground text-center'>
+          <CardContent className='flex h-full flex-col items-center justify-center p-4'>
+            <Award className='mb-2 h-8 w-8 text-white' />
+            <div className='text-2xl font-bold'>6 mins</div>
+            <div className='text-muted-foreground text-center text-sm'>
               Longest Exposure
             </div>
           </CardContent>
@@ -97,7 +89,7 @@ export function StatisticsPage() {
           <CardTitle>Your Progress</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className='text-muted-foreground'>{stats.message}</p>
+          <p className='text-muted-foreground'>Cool!</p>
         </CardContent>
       </Card>
     </div>

@@ -1,6 +1,8 @@
 import type React from 'react';
-
 import { useState } from 'react';
+
+import type { ColdExposureSession } from '~/shared/model/types';
+import { Button } from '~/shared/shadcn-ui/button';
 import {
   Card,
   CardContent,
@@ -8,10 +10,7 @@ import {
   CardTitle,
 } from '~/shared/shadcn-ui/card';
 import { Input } from '~/shared/shadcn-ui/input';
-import { Button } from '~/shared/shadcn-ui/button';
 import { Label } from '~/shared/shadcn-ui/label';
-import { getSessions, saveSessions } from '~/shared/model/mock-storage';
-import type { ColdExposureSession } from '~/shared/model/types';
 
 interface SessionFormProps {
   onSessionCreated: () => void;
@@ -31,8 +30,7 @@ export function CreateSessionForm({ onSessionCreated }: SessionFormProps) {
       preparationDuration: Number.parseInt(preparationDuration),
     };
 
-    const sessions = getSessions();
-    saveSessions([...sessions, session]);
+    console.log({ session });
 
     setName('');
     setColdDuration('60');
@@ -42,7 +40,7 @@ export function CreateSessionForm({ onSessionCreated }: SessionFormProps) {
   };
 
   return (
-    <Card className='w-full max-w-md mx-auto border-zinc-800 bg-zinc-900'>
+    <Card className='mx-auto w-full max-w-md border-zinc-800 bg-zinc-900'>
       <CardHeader>
         <CardTitle>Create Cold Exposure</CardTitle>
       </CardHeader>
