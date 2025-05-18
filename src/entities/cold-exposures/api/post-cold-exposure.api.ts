@@ -5,7 +5,7 @@ import type { IColdExposure } from '../model/types';
 
 export const postColdExposure = async (
   newColdExposure: PostColdExposureRequest,
-): Promise<Array<IColdExposure>> => {
+): Promise<IColdExposure> => {
   const options = {
     method: 'POST',
     headers: {
